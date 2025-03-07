@@ -1,1 +1,26 @@
 /* В этом файле будут храниться все значения переменных в исходном состоянии, а так же их изменения в зависимости от ширины устройства */
+
+:root {
+  --main-font: 'Inter';
+  --accent-font: 'PressStart2P';
+  --wght-text: 400;
+  --wght-heading: 700;
+  --min-inline-size: 375px;
+  --max-inline-size: 1440px;
+  --max-inline-size-block: 700px;
+  --white: #fff;
+  --black: #000;
+  --red: #ff0000;
+  --mainColor: var(--black);
+  --background: var(--white);
+  --text-stroke: var(--white);
+  --font-size-md: 18px;
+  --font-size-sm: 14px;
+  --page-background-image: repeating-linear-gradient(
+      90deg,
+      #d3d3d3 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(180deg, #d3d3d3 2px, transparent 4px),
+    linear-gradient(180deg, #e7e7e7 0.01%, #1a1a1a 100%);
+}
