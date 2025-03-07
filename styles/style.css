@@ -20,6 +20,7 @@
   min-inline-size: var(--min-inline-size, 375px);
   max-inline-size: var(--max-inline-size, 1440px);
   min-block-size: 100dvb;
+  font-variation-settings: 'wght' var(--wght-text, 400);
 }
 
 .rectangle {
@@ -78,6 +79,7 @@
   padding-inline-start: 10px;
   padding-inline-end: 40px;
   padding-block: 5px;
+  font-variation-settings: 'wght' var(--wght-heading, 700);
 }
 
 .card__image {
