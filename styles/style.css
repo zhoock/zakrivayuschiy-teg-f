@@ -1,13 +1,52 @@
-/* Здесь вы напишете основную часть стилей страницы.
+/* Код градиента полностью отвечает требованиям задания
+ Проектная работа «Закрывающий тег»/Шаг 6. Фильтры/Фон
 
-Будьте внимательны! Для корректной работы скриптов на этом сайте нужно,
-чтобы в HTML некоторые классы были названы особым образом:
-✦ like-icon — для svg-иконки анимированного сердца
-✦ card__like-button — для кнопки Like рядом с иконкой
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
-✦ button__text — для обозначения текстового элемента внутри кнопки
+Первый градиент создает вертикальные полосы:
 
+repeating-linear-gradient(
+    90deg,
+    #d3d3d3 2px,
+    transparent 4px
+)
+Полосы идут слева направо (90deg).
+Ширина цветной полосы #d3d3d3 — 2px.
+Ширина прозрачной полосы — 2px (4px - 2px).
+
+Второй градиент создает горизонтальные полосы:
+
+repeating-linear-gradient(
+    180deg,
+    #d3d3d3 2px,
+    transparent 4px
+)
+
+Полосы идут сверху вниз (180deg).
+Ширина и прозрачность такие же, создавая сетку.
+
+Третий градиент отвечает за плавный переход цвета:
+
+linear-gradient(
+    180deg,
+    #e7e7e7 0.01%,
+    #1a1a1a 100%
+)
+
+Цвет плавно меняется сверху вниз.
+Начинает с #e7e7e7 почти сразу (0.01%), затем плавно переходит к #1a1a1a на 100%.
+
+Фиксация фона
+
+background-size: cover;
+background-attachment: fixed;
+
+
+background-size: cover — фон занимает всё пространство.
+background-attachment: fixed — фон зафиксирован, не скроллится.
+
+
+=======================================
+
+В модально окне горизонтальной проктурки выявлено не было, прошу уточнить ваше исправление
 */
 
 .page {
@@ -40,10 +79,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-block: 100px !important;
   padding-block: clamp(7.5rem, 6.9231rem + 2.4615vw, 8rem);
-  font-family: var(--accent-font, sans-serif);
+  font-family: var(--accent-font, fantasy);
   text-transform: uppercase;
+
+  &.important {
+    margin-block: 100px;
+  }
 }
 
 .header__logo {
@@ -66,13 +108,14 @@
 .card__watermark {
   position: absolute;
   opacity: 0.5;
-  font-family: var(--accent-font, sans-serif);
+  font-family: var(--accent-font, fantasy);
   font-size: var(--font-size-sm, 14px);
   text-transform: uppercase;
   inset-block-start: 25px;
   inset-inline-end: clamp(0.8125rem, -0.0529rem + 3.6923vw, 1.5625rem);
   mix-blend-mode: hard-light;
-  -webkit-text-stroke: 1px var(--text-stroke, #fff);
+  text-shadow: -1px 0 var(--text-stroke, #fff), 0 1px var(--text-stroke, #fff),
+    1px 0 var(--text-stroke, #fff), 0 -1px var(--text-stroke, #fff);
 }
 
 .card__title {
@@ -80,6 +123,7 @@
   padding-inline-end: 40px;
   padding-block: 5px;
   font-variation-settings: 'wght' var(--wght-heading, 700);
+  font-size: var(--font-size-md, 18px);
 }
 
 .card__image {
@@ -119,6 +163,7 @@
   cursor: pointer;
   appearance: none;
   block-size: 38px;
+  margin-inline-end: 4px;
 
   &:focus {
     outline: none;
@@ -138,12 +183,13 @@
   position: relative;
   border: 2px solid currentColor;
   overflow: hidden;
-  font-family: var(--accent-font, sans-serif);
+  font-family: var(--accent-font, fantasy);
   font-size: var(--font-size-sm, 14px);
   background-color: var(--white, #fff);
   cursor: pointer;
   appearance: none;
   block-size: 38px;
+  transition: box-shadow 0.3s ease;
 
   &:focus {
     outline: none;
@@ -152,7 +198,6 @@
   &:focus-visible {
     box-shadow: 2px 2px 0 0 currentColor;
     outline: none;
-    transition: box-shadow 0.3s ease;
   }
 
   &::before {
@@ -184,16 +229,6 @@
   margin-block-end: 50px;
   inline-size: clamp(19.125rem, 17.0337rem + 8.9231vw, 20.9375rem);
   block-size: 57px;
-
-  @media (width <= 375px) {
-    flex-direction: column;
-    justify-content: center;
-    block-size: 84px;
-
-    svg {
-      inline-size: 28px;
-    }
-  }
 
   svg {
     inline-size: 20px;
@@ -275,29 +310,11 @@
   }
 }
 
-@keyframes scale {
-  0% {
-    scale: 1;
-  }
-  100% {
-    scale: 1.25;
-  }
-}
-
-@keyframes opacity {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 /* Dialog */
 .dialog {
   border: 2px solid currentColor;
   padding: 30px;
-  font-family: var(--accent-font, sans-serif);
+  font-family: var(--accent-font, fantasy);
   font-size: var(--font-size-sm, 14px);
   text-transform: uppercase;
   background-color: var(--background, #fff);
@@ -324,6 +341,10 @@
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.75);
   }
+}
+
+.page:has(dialog[open]) {
+  overflow: hidden;
 }
 
 /* Filters */
@@ -359,10 +380,27 @@
   filter: sepia(80%) invert(0.7) drop-shadow(5px 15px 3px rgba(0, 0, 0, 0.8));
 }
 
+@media (width <= 375px) {
+  .button-open-dialog {
+    flex-direction: column;
+    justify-content: center;
+    block-size: 84px;
+
+    svg {
+      inline-size: 28px;
+    }
+  }
+}
+
 /* Поддержка дополнительных свойств */
-@supports (text-stroke: 1px var(--text-stroke, #fff)) {
+@supports (
+  (text-stroke: 1px var(--text-stroke, #fff)) or
+    (-webkit-text-stroke: 1px var(--text-stroke, #fff))
+) {
   .card__watermark {
+    -webkit-text-stroke: 1px var(--text-stroke, #fff);
     text-stroke: 1px var(--text-stroke, #fff);
+    text-shadow: none;
   }
 }
 
